@@ -14,6 +14,7 @@ from threading import Timer
 
 import pyautogui as pag
 import rumps
+from AppKit import NSAppearance, NSAppearanceNameDarkAqua
 
 
 def get_resource_path(relative_path):
@@ -25,8 +26,10 @@ def get_resource_path(relative_path):
 
 class StatusBarApp(rumps.App):
     def __init__(self):
-        icon_path = get_resource_path("icon.png")
-        super().__init__("AFK Bot", icon=icon_path)
+        self.icon_light = get_resource_path("icon-light-theme.png")
+        self.icon_dark = get_resource_path("icon-dark-theme.png")
+
+        super().__init__("AFK Bot", icon=self.icon_light)
         self.menu = ["Start", "Stop"]
         self.running = False
         self.timer = None
@@ -38,6 +41,16 @@ class StatusBarApp(rumps.App):
         screen_size = pag.size()
         self.screen_width = screen_size[0]
         self.screen_height = screen_size[1]
+
+        self.update_icon_for_appearance
+
+    def update_icon_for_appearance(self):
+        """Update the icon based on macOS system appearance."""
+        current_appearance = NSAppearance.currentAppearance()
+        if current_appearance and "Dark" in current_appearance.name():
+            self.icon = self.icon_dark
+        else:
+            self.icon = self.icon_light
 
     @rumps.clicked("Start")
     def start_bot(self, _):
