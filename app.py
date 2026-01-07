@@ -26,8 +26,8 @@ def get_resource_path(relative_path):
 
 class StatusBarApp(rumps.App):
     def __init__(self):
-        self.icon_light = get_resource_path("icon-light-theme.png")
-        self.icon_dark = get_resource_path("icon-dark-theme.png")
+        self.icon_dark = get_resource_path("icon-light-theme.png")
+        self.icon_light = get_resource_path("icon-dark-theme.png")
 
         super().__init__("AFK Bot")
         self.menu = ["Start", "Stop"]
