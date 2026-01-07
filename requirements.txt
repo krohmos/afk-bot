@@ -1,3 +1,4 @@
+Pillow
 pyautogui
 pyinstaller
 rumps
